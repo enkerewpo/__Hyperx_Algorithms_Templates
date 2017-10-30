@@ -45,7 +45,7 @@ void slieve(int n) {
 			phi[k] = phi[i] * phi[prime[j]];
 			num_mindiv[k] = 1;
 			num_div[k] = num_div[i] * 2;
-			miu[k] -= miu[i];
+			miu[k] = -miu[i];
 			sum_div[k] = sum_div[i] * sum_div[prime[j]];
 			t1[k] = 1 + prime[j];
 			t2[k] = prime[j];
