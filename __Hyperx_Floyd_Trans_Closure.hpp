@@ -1,7 +1,6 @@
 #ifndef __HYPERX_FLOYD_TRANS_CLOSURE_HPP
 #define __HYPERX_FLOYD_TRANS_CLOSURE_HPP
-void floyd()
-{
+void floyd() {
 	int i, j, k;
 	int n;
 	bool* con = new bool[n + 1][n + 1];

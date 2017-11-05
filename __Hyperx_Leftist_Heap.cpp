@@ -5,8 +5,7 @@ using namespace std;
  * email: enkerewpo@gmail.com
  * blog: enkerewpo.github.io
  */
-class node
-{
+class node {
 public:
 	node* ls;
 	node* rs;
@@ -16,8 +15,7 @@ public:
 typedef node heap;
 typedef node* node_addr;
 
-heap* mesh(heap* &lhs, heap* &rhs)
-{
+heap* mesh(heap* &lhs, heap* &rhs) {
 	if (lhs == NULL) return rhs;
 	if (rhs->x > lhs->x) swap(lhs, rhs);
 	lhs->rs = mesh(lhs->rs, rhs);
@@ -30,8 +28,7 @@ heap* mesh(heap* &lhs, heap* &rhs)
 	return lhs;
 }
 
-heap* meld(heap* &lhs, heap* &rhs)
-{
+heap* meld(heap* &lhs, heap* &rhs) {
 	if (lhs == NULL)
 		return rhs;
 	if (rhs == NULL)
@@ -39,8 +36,7 @@ heap* meld(heap* &lhs, heap* &rhs)
 	return mesh(lhs, rhs);
 }
 
-void insert(int _x, heap* &h)
-{
+void insert(int _x, heap* &h) {
 	node* x = new node;
 	x->x = _x;
 	x->ls = NULL;
@@ -49,15 +45,13 @@ void insert(int _x, heap* &h)
 	h = meld(x, h);
 }
 
-int pop(heap* &h)
-{
+int pop(heap* &h) {
 	int ret = h->x;
 	h = meld(h->ls, h->rs);
 	return ret;
 }
 
-int main()
-{
+int main() {
 	heap* h = NULL;
 	while (1) {
 		int t;

@@ -14,17 +14,17 @@ int main() {
 	int lenstr = strlen(str + 1);
 	int j = 0;
 	nxt[1] = 0;
-	for(int i = 2; i <= lent; i++) {
-		while(j > 0 && t[i] != t[j + 1]) j = nxt[j];
-		if(t[j + 1] == t[i]) j++;
+	for (int i = 2; i <= lent; i++) {
+		while (j > 0 && t[i] != t[j + 1]) j = nxt[j];
+		if (t[j + 1] == t[i]) j++;
 		nxt[i] = j;
 		// printf("nxt[%d] = %lld\n", i, nxt[i]);
 	}
 	j = 0;
-	for(int i = 1; i <= lenstr; i++) {
-		while(j > 0 && str[i] != t[j + 1]) j = nxt[j];
-		if(t[j + 1] == str[i]) j++;
-		if(j == lent) {
+	for (int i = 1; i <= lenstr; i++) {
+		while (j > 0 && str[i] != t[j + 1]) j = nxt[j];
+		if (t[j + 1] == str[i]) j++;
+		if (j == lent) {
 			// printf("at %d got full\n", i);
 			ans++;
 			j = nxt[j];

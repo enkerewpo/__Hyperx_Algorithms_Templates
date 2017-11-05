@@ -4,21 +4,17 @@
  * email: enkerewpo@gmail.com
  * blog: enkerewpo.github.io
  */
-namespace __gnu_cxx_heap
-{
+namespace __gnu_cxx_heap {
 
-int inline __left(int _x)
-{
+int inline __left(int _x) {
 	return _x * 2;
 }
 
-int inline __right(int _x)
-{
+int inline __right(int _x) {
 	return _x * 2 + 1;
 }
 
-int inline __parent(int _x)
-{
+int inline __parent(int _x) {
 	return floor(_x / 2);
 }
 
@@ -30,8 +26,7 @@ template <typename _Tp> void inline
  * @param idx       Rooted being processed root
  * @param heap_size the size of the full structure
  */
-max_heapify(_Tp A[], int idx, size_t heap_size)
-{
+max_heapify(_Tp A[], int idx, size_t heap_size) {
 	int l = __left(idx);
 	int r = __right(idx);
 	int max_e;
@@ -50,8 +45,7 @@ template <typename _Tp> void inline
  * @param begin pointer
  * @param end   pointer
  */
-build_max_heap(_Tp* begin, _Tp* end)
-{
+build_max_heap(_Tp* begin, _Tp* end) {
 	size_t size = end - begin - 1;
 	for (int iter = size / 2; iter >= 0; iter--) {
 		max_heapify(begin, iter, size);
@@ -64,8 +58,7 @@ template <typename _Tp> inline
  * @param lhs [description]
  * @param rhs [description]
  */
-void __swap(_Tp &lhs, _Tp &rhs)
-{
+void __swap(_Tp &lhs, _Tp &rhs) {
 	_Tp tmp = rhs;
 	rhs = lhs;
 	lhs = tmp;
@@ -77,8 +70,7 @@ template <typename _Tp> inline
  * @param begin pointer
  * @param end   pointer
  */
-void sort_heap(_Tp* begin, _Tp* end)
-{
+void sort_heap(_Tp* begin, _Tp* end) {
 	build_max_heap(begin, end);
 	size_t size = end - begin - 1;
 	for (int iter = size; iter >= 1; iter--) {
@@ -88,8 +80,7 @@ void sort_heap(_Tp* begin, _Tp* end)
 }
 
 template <typename _Tp> inline
-_Tp maximum_heap(_Tp* begin)
-{
+_Tp maximum_heap(_Tp* begin) {
 	return begin[0];
 }
 
@@ -99,8 +90,7 @@ template <typename _Tp> inline
  * @param begin pointer
  * @param end   pointer
  */
-void pop(_Tp* begin, _Tp* end)
-{
+void pop(_Tp* begin, _Tp* end) {
 	size_t size = end - begin - 1;
 	if (end - begin < 1) {
 		fprintf(stderr, "heap size is zero when it was instruct to pop()\n");
@@ -117,8 +107,7 @@ template <typename _Tp> inline
  * @param idx index
  * @param key keyword
  */
-void heap_increase(_Tp A[], int idx, _Tp key)
-{
+void heap_increase(_Tp A[], int idx, _Tp key) {
 	A[idx] = key;
 	while (idx > 1 and A[__parent(idx)] < A[idx]) {
 		__swap(A[idx], A[__parent(idx)]);
@@ -133,16 +122,14 @@ template <typename _Tp> inline
  * @param end   pointer
  * @param _x    input _Tp type varibles
  */
-void push(_Tp* begin, _Tp* end, _Tp _x)
-{
+void push(_Tp* begin, _Tp* end, _Tp _x) {
 	size_t size = end - begin;
 	heap_increase(begin, size, _x);
 }
 
 }
 
-int main()
-{
+int main() {
 	int a[20] = {0, 4, 1, 3, 2, 16, 9, 10, 14, 8, 7};
 	puts("original sequences:");
 	for (int i = 1; i <= 10; i++) printf("%d ", a[i]);

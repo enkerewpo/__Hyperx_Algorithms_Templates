@@ -7,8 +7,7 @@ int hd[N], nxt[2 * M], f[2 * M], to[2 * M], tot = 1;
 
 int S, T;
 
-void add(int a, int b, int c)
-{
+void add(int a, int b, int c) {
 	nxt[++tot] = hd[a], to[hd[a] = tot] = b, f[tot] = c;
 	nxt[++tot] = hd[b], to[hd[b] = tot] = a, f[tot] = 0;
 }
@@ -16,8 +15,7 @@ void add(int a, int b, int c)
 int dis[N];
 int que[N];
 
-bool check()
-{
+bool check() {
 	memset(dis, -1, sizeof dis);
 	int head = 0, tail = -1;
 	dis[que[++tail] = S] = 0;
@@ -32,8 +30,7 @@ bool check()
 	return dis[T] != -1;
 }
 
-int argument(int u, int rem)
-{
+int argument(int u, int rem) {
 	if (u == T) return rem;
 	int cnt = 0;
 	for (int e = hd[u]; e && rem > cnt; e = nxt[e]) {
@@ -49,8 +46,7 @@ int argument(int u, int rem)
 	return cnt;
 }
 
-int dinic()
-{
+int dinic() {
 	int cnt = 0, tmp;
 	while (check())
 		while (tmp = argument(S, INF))
@@ -58,7 +54,6 @@ int dinic()
 	return cnt;
 }
 
-int main()
-{
+int main() {
 	return 0;
 }

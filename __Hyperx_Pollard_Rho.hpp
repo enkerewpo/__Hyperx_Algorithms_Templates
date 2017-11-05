@@ -7,8 +7,7 @@
  * email: enkerewpo@gmail.com
  * blog: enkerewpo.github.io
  */
-ll mult_mod(ll a, ll b, ll c)
-{
+ll mult_mod(ll a, ll b, ll c) {
 	a %= c;
 	b %= c;
 	ll ret = 0;
@@ -24,8 +23,7 @@ ll mult_mod(ll a, ll b, ll c)
 	return ret;
 }
 
-ll q_pow(ll x, ll n, ll mod)
-{
+ll q_pow(ll x, ll n, ll mod) {
 	if (n == 1) return x % mod;
 	x %= mod;
 	ll tmp = x;
@@ -38,8 +36,7 @@ ll q_pow(ll x, ll n, ll mod)
 	return ret;
 }
 
-bool check(ll a, ll n, ll x, ll t)
-{
+bool check(ll a, ll n, ll x, ll t) {
 	ll ret = q_pow(a, x, n);
 	ll last = ret;
 	for (int i = 1; i <= t; i++) {
@@ -51,8 +48,7 @@ bool check(ll a, ll n, ll x, ll t)
 	return false;
 }
 
-bool Miller_Rabin(ll n)
-{
+bool Miller_Rabin(ll n) {
 	if (n < 2) return false;
 	if (n == 2) return true;
 	if ((n & 1) == 0) return false;
@@ -73,8 +69,7 @@ bool Miller_Rabin(ll n)
 ll fac[100];
 int tot;
 
-ll gcd(ll a, ll b)
-{
+ll gcd(ll a, ll b) {
 	if (a == 0) return 1;
 	if (a < 0) return gcd(-a, b);
 	while (b) {
@@ -85,8 +80,7 @@ ll gcd(ll a, ll b)
 	return a;
 }
 
-ll Pollard_rho(ll x, ll c)
-{
+ll Pollard_rho(ll x, ll c) {
 	ll i = 1, k = 2;
 	ll x0 = rand() % x;
 	ll y = x0;
@@ -103,8 +97,7 @@ ll Pollard_rho(ll x, ll c)
 	}
 }
 
-void findfac(ll n)
-{
+void findfac(ll n) {
 	if (Miller_Rabin(n)) {
 		fac[tot++] = n;
 		return;
