@@ -54,7 +54,7 @@ void slieve(int n) {
 }
 
 int main() {
-	int n = 1e9 + 9;
+	int n = 107;
 	slieve(n);
 	printf("n %s", is_prime[n] ? "is prime" : "not prime");
 	return 0;
