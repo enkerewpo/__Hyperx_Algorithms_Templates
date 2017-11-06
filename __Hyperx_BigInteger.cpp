@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long LL;
-const int N = 1005;
+const int N = 20005;
 const LL zip = 1e8;
+LL Pow(LL a, LL b) { LL ret = 1; while (b) { if (b & 1) {ret *= a;} a *= a; b >>= 1; } return ret; }
 class BigInt {
 public:
     LL a[N];
@@ -11,16 +12,12 @@ public:
     template <typename _Tp>
     BigInt(_Tp x) {
         int p = 1, tmp = 0, y; a[0] = 1;
-        while (x) {
-            y = x % 10; tmp += y * pow(10, p - 1); p %= 8; x /= 10; if (p == 0) { a[a[0]] = tmp; tmp = 0; a[0]++; } p++;
-        } if (tmp) a[a[0]] = tmp; else a[0]--;
+        while (x) { y = x % 10; tmp += y * Pow(10, p - 1); p %= 8; x /= 10; if (p == 0) { a[a[0]] = tmp; tmp = 0; a[0]++; } p++; } if (tmp) a[a[0]] = tmp; else a[0]--;
     }
     void read() {
         char s[N]; scanf("%s", s + 1); int len = strlen(s + 1), st = 1; if (s[1] == '-') st = 2, minus = true;
         int p = 1, tmp = 0, y; a[0] = 1;
-        for (int i = len; i >= st; i--) {
-            y = (s[i] - '0') % 10, tmp += y * pow(10, p - 1), p %= 8; if (p == 0) { a[a[0]] = tmp; tmp = 0; a[0]++; } p++;
-        } if (tmp) a[a[0]] = tmp; else a[0]--;
+        for (int i = len; i >= st; i--) { y = (s[i] - '0') % 10, tmp += y * Pow(10, p - 1), p %= 8; if (p == 0) { a[a[0]] = tmp; tmp = 0; a[0]++; } p++; } if (tmp) a[a[0]] = tmp; else a[0]--;
     }
     void print() {
         if ((a[0] == 0) || ((a[0] == 1) && (a[1] == 0))) { printf("0"); return;}
@@ -31,7 +28,7 @@ public:
     LL operator [] (const unsigned int idx) const { return a[idx]; }
     LL& operator [] (const unsigned int idx) { return a[idx]; }
     friend bool operator == (const BigInt lhs, const BigInt rhs) {
-        if(lhs.minus ^ rhs.minus) return false;
+        if (lhs.minus ^ rhs.minus) return false;
         if (lhs[0] == rhs[0]) {
             for (int i = 1; i <= lhs[0]; i++) { if (lhs[i] != rhs[i]) return false; } return true;
         } else return false;
@@ -43,7 +40,7 @@ public:
     }
     friend BigInt operator + (BigInt a, BigInt b) {
         BigInt ret; bool f = a.minus ^ b.minus, g = false;
-        if (f) { if (a.minus) g = true; a = a.abs(), b = b.abs(), ret = a - b; if(g) ret.minus ^= 1; return ret; }
+        if (f) { if (a.minus) g = true; a = a.abs(), b = b.abs(), ret = a - b; if (g) ret.minus ^= 1; return ret; }
         for (int i = 1; i <= max(a[0], b[0]); i++) { ret[i] += a[i] + b[i]; ret[i + 1] = ret[i] / zip; ret[i] %= zip;}
         ret[0] = max(a[0], b[0]);
         if (ret[ret[0] + 1]) {ret[0]++;} if (a.minus) ret.minus = true; return ret;
@@ -54,7 +51,7 @@ public:
         c.a[0] = a[0]; if (c.a[c.a[0] + 1] > 0) c.a[0]++; if (f) c.minus = true; return c;
     }
     BigInt operator * (const BigInt rhs) const {
-        BigInt ret; bool f = false; if (minus || rhs.minus) f = true;
+        BigInt ret; bool f = false; if (minus ^ rhs.minus) f = true;
         for (int i = 1; i <= a[0]; i++)
             for (int j = 1; j <= rhs[0]; j++)
                 ret[i + j - 1] += a[i] * rhs[j], ret[i + j] += ret[i + j - 1] / zip, ret[i + j - 1] %= zip;
@@ -63,7 +60,7 @@ public:
     }
     friend BigInt operator - (BigInt lhs, BigInt rhs) {
         if (lhs == rhs) {return BigInt(0);}
-        if(lhs.minus ^ rhs.minus) { if(rhs.minus) return lhs + rhs.abs(); else { BigInt ret = lhs.abs() + rhs.abs(); ret.minus = true; return ret; } }
+        if (lhs.minus ^ rhs.minus) { if (rhs.minus) return lhs + rhs.abs(); else { BigInt ret = lhs.abs() + rhs.abs(); ret.minus = true; return ret; } }
         bool right = lhs > rhs;
         lhs = lhs.abs(), rhs = rhs.abs();
         if (rhs > lhs) swap(lhs, rhs);
@@ -87,6 +84,10 @@ int main() {
     BigInt a, b;
     a.read(), b.read();
     BigInt c = a + b;
-    c.print();
+    c.print(); puts("");
+    c = a - b;
+    c.print(); puts("");
+    c = a * b;
+    c.print(); puts("");
     return 0;
 }
