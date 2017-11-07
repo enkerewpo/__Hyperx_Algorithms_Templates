@@ -15,7 +15,7 @@ int miu[N];
 bool is_prime[N];
 int prime[N], tot;
 
-void slieve(int n) {
+void sieve(int n) {
 	miu[1] = 1;
 	memset(is_prime, true, sizeof is_prime);
 	for (int i = 2; i <= n; i++) {
@@ -54,8 +54,6 @@ void slieve(int n) {
 }
 
 int main() {
-	int n = 107;
-	slieve(n);
-	printf("n %s", is_prime[n] ? "is prime" : "not prime");
+	sieve(10000000);
 	return 0;
 }

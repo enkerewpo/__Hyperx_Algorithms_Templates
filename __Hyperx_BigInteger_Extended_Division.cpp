@@ -204,7 +204,7 @@ int main() {
     a.read(), b.read();
     BigInt c = a / b;
     c.print();puts("");
-    BigInt c = a % b;
+    c = a % b;
     c.print();puts("");
     return 0;
 }
