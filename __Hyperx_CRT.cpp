@@ -1,5 +1,5 @@
 #define LL long long
-LL CRT(int n, LL *m, LL *a) {
+LL china(int n, LL *m, LL *a) {
     LL M = 1, d, y, x = 0;
     for (int i = 1; i <= n; i++) M *= m[i];
     for (int i = 1; i <= n; i++) {
@@ -15,5 +15,5 @@ int main() {
     scanf("%d", &n);
     for (int i = 1; i <= n; i++)
         scanf("%lld%lld", &m[i], &a[i]);
-    printf("%lld", CRT(n, m, a));
+    printf("%lld", china(n, m, a));
 }
